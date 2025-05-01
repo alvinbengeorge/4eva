@@ -15,5 +15,5 @@ export default function Typewriter({ words }: { words: string }) {
         }
     }, [index, words]);
 
-    return <span>{displayedText}</span>;
+    return <span className="">{displayedText}</span>;
 }
