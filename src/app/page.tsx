@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import VoiceButton from "@/components/voiceButton";
 import Typewriter from "@/components/typewriter";
 import SearchBar from "@/components/searchBar";
@@ -35,7 +34,7 @@ export default function Home() {
       <div className="grid place-items-center grid-cols-2 h-full w-full">
         <div className="grid place-items-center w-full h-full bg-black">
           <SearchBar />
-          <VoiceButton setSearchMode={setSearchMode}/>
+          <VoiceButton setSearchMode={setSearchMode} />
           <div className="grid place-items-center grid-cols-3 gap-2 w-full h-full p-4">
             <button
               onClick={() => setSearchMode(1)}
@@ -69,11 +68,21 @@ export default function Home() {
             {searchMode === 1 && (
             <div className="p-8">
               <input
+              id="facultyInput"
               type="text"
               placeholder="Search for faculty..."
               className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <button className="mt-4 w-full p-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+              <button
+              onClick={() => {
+                const query = (document.getElementById("facultyInput") as HTMLInputElement).value;
+                fetch(`/api/faculty?query=${encodeURIComponent(query)}`)
+                .then((response) => response.json())
+                .then((data) => console.log(data))
+                .catch((error) => console.error("Error:", error));
+              }}
+              className="mt-4 w-full p-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+              >
               Search
               </button>
             </div>
@@ -81,11 +90,21 @@ export default function Home() {
             {searchMode === 2 && (
             <div className="p-8">
               <input
+              id="officeInput"
               type="text"
               placeholder="Search for office..."
               className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <button className="mt-4 w-full p-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+              <button
+              onClick={() => {
+                const query = (document.getElementById("officeInput") as HTMLInputElement).value;
+                fetch(`/api/office?query=${encodeURIComponent(query)}`)
+                .then((response) => response.json())
+                .then((data) => console.log(data))
+                .catch((error) => console.error("Error:", error));
+              }}
+              className="mt-4 w-full p-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+              >
               Search
               </button>
             </div>
@@ -93,11 +112,21 @@ export default function Home() {
             {searchMode === 3 && (
             <div className="p-8">
               <input
+              id="departmentInput"
               type="text"
               placeholder="Search for department..."
               className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <button className="mt-4 w-full p-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+              <button
+              onClick={() => {
+                const query = (document.getElementById("departmentInput") as HTMLInputElement).value;
+                fetch(`/api/department?query=${encodeURIComponent(query)}`)
+                .then((response) => response.json())
+                .then((data) => console.log(data))
+                .catch((error) => console.error("Error:", error));
+              }}
+              className="mt-4 w-full p-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+              >
               Search
               </button>
             </div>
